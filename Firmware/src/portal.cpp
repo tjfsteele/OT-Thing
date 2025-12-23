@@ -1,4 +1,4 @@
-
+#include <WiFi.h>
 #include <Update.h>
 #include <ArduinoJson.h>
 #include <AsyncTCP.h>

@@ -15,7 +15,7 @@ extern bool WIRED_ETHERNET_PRESENT;
 #define GPIO_STATUS_LED 8
 #define GPIO_OTRED_LED 2
 #define GPIO_OTGREEN_LED 48
-/* #define GPIO_BYPASS_RELAY 47 */
+#define GPIO_BYPASS_RELAY 47 /* not connected on Nodo but need for compilation */
 #define GPIO_STEPUP_ENABLE 10
 #define GPIO_1WIRE_DIO 4
 #define GPIO_OTSLAVE_IN 6
