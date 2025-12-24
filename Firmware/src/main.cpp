@@ -175,7 +175,8 @@ void setup() {
                   ethMac[0], ethMac[1], ethMac[2], ethMac[3], ethMac[4],
                   ethMac[5]);
 
-    if (Ethernet.begin(ethMac)) {
+    Serial.println("Waiting 10s to get dhcp lease");
+    if (Ethernet.begin(ethMac, 10000)) {
       if (Ethernet.linkStatus() == LinkON) { // belt and braces
         Serial.print("DHCP successful! IP address: ");
         Serial.println(Ethernet.localIP());
