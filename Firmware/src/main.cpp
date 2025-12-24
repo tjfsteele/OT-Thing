@@ -11,6 +11,7 @@
 #include "command.h"
 #include "sensors.h"
 #include "HADiscLocal.h"
+#include <esp_wifi.h>
 #include "time.h"
 //#include <NimBLEDevice.h>
 
@@ -194,15 +195,22 @@ void setup() {
 
     statusLedTicker.attach(0.2, statusLedLoop);
 
-    bool noStoredWifi = WiFi.SSID().isEmpty();
+    // Wifi needs to be initialized.
+    WiFi.mode(WIFI_STA);
+    // Read out the config from NVS
+    wifi_config_t conf;
+    esp_err_t err = esp_wifi_get_config(WIFI_IF_STA, &conf);
+    // If read is successfull and an ssid is specified we assume its stored
+    bool noStoredWifi = (err != ESP_OK || conf.sta.ssid[0] == '\0');
+
     configMode = (digitalRead(GPIO_CONFIG_BUTTON) == 0) || noStoredWifi;
-    if (configMode)
+    if (configMode){
         statusLedData = 0xA000;
-    
+    }
+
     WiFi.onEvent(wifiEvent);
     WiFi.setSleep(false);
     WiFi.begin();
-    
     OneWireNode::begin();
     haDisc.begin();
     mqtt.begin();
