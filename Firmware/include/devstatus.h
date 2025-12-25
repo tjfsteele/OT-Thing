@@ -5,7 +5,9 @@
 #include <ArduinoJson.h>
 #include <ESPAsyncWebServer.h>
 #include <mutex>
-
+#ifdef NODO
+inline bool WIRED_ETHERNET_PRESENT, OLED_PRESENT = false;
+#endif
 extern class DevStatus {
 private:
     JsonDocument doc;

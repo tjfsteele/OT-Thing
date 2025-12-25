@@ -49,9 +49,12 @@ JsonDocument &DevStatus::buildDoc() {
     jwifi[F("ipsta")] = WiFi.localIP().toString();
     jwifi[F("mac")] = WiFi.macAddress();
     jwifi[F("hostname")] = WiFi.getHostname();
-    jwifi[F("sta_ssid")] = WiFi.SSID();
-    jwifi[F("rssi")] = WiFi.RSSI();
-    
+    if (WIRED_ETHERNET_PRESENT)
+        jwifi[F("sta_ssid")] = "WIRED";
+    else {
+        jwifi[F("sta_ssid")] = WiFi.SSID();
+        jwifi[F("rssi")] = WiFi.RSSI();
+    }
     JsonObject jmqtt = doc[F("mqtt")].to<JsonObject>();
     jmqtt[F("connected")] = mqtt.connected();
     jmqtt[F("basetopic")] = mqtt.getBaseTopic();

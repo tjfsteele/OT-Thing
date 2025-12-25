@@ -75,8 +75,6 @@ class scanCallbacks : public NimBLEScanCallbacks {
 */
 
 #ifdef NODO
-bool OLED_PRESENT = false;
-bool WIRED_ETHERNET_PRESENT = false;
 Adafruit_SSD1306 oled_display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 byte ethMac[6];
 // ** New function for display status **
