@@ -91,8 +91,8 @@ void displayNetworkStatus() {
 
     if (configMode) {
         // 1. CONFIG MODE (Highest Priority Display)
-        statusLine = F("OTGW32 Config");
-        ipLine = String(F("AP: ")) + WiFi.softAPIP().toString();
+        statusLine = String(F("SSID: ")) + WiFi.softAPSSID();
+        ipLine = String(F("http://")) + WiFi.softAPIP().toString() + "/";
     } else if (WIRED_ETHERNET_PRESENT) {
         // 2. WIRED ETHERNET (Ethernet is active and connected)
         statusLine = F("Wired Network");
