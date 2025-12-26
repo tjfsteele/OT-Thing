@@ -95,17 +95,16 @@ void displayNetworkStatus() {
         ipLine = String(F("AP: ")) + WiFi.softAPIP().toString();
     } else if (WIRED_ETHERNET_PRESENT) {
         // 2. WIRED ETHERNET (Ethernet is active and connected)
-        statusLine = F("Network: WIRED");
+        statusLine = F("Wired Network");
         ipLine = String(F("IP: ")) + Ethernet.localIP().toString();
     } else {
         // 3. WIFI STATUS (Ethernet failed or is absent)
-        statusLine = F("Network: WiFi");
+        statusLine = String(F("WiFi: ")) + WiFi.SSID();
+
         if (WiFi.isConnected()) {
-            statusLine = F("WiFi: Connected");
             ipLine = String(F("IP: ")) + WiFi.localIP().toString();
         } else {
-            statusLine = F("WiFi: Connecting");
-            ipLine = String(F("SSID: ")) + WiFi.SSID();
+            ipLine = "Connecting";
         }
     }
 
@@ -118,7 +117,7 @@ void displayNetworkStatus() {
     // You can add a third line for boiler status, e.g., using otcontrol.getStatus()
     oled_display.setCursor(0, 20);
     // Placeholder: This will require accessing OT status variables
-    oled_display.println(F("OT Status: OK/Fail")); 
+    // oled_display.println(F("OT Status: OK/Fail")); 
     
     oled_display.display();
 }
